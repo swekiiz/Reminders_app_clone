@@ -8,9 +8,11 @@ This project was made to learn a Flutter.
 $ cd my_app
 
 $ flutter run
+
 ### Flutter devtools
 
 $ flutter pub global activate devtools
+
 $ flutter pub global run devtools
 
 # Help
