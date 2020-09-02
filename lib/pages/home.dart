@@ -5,30 +5,34 @@ import 'package:my_app/components/mylist.dart';
 
 class HomePage extends StatelessWidget {
   final litsOfHomwWidget = [
-    Homewidget(
-      text: 'Today',
-      icon: Icons.calendar_today,
-      count: 0,
-      color: Colors.blue,
-    ),
-    Homewidget(
-      text: 'Scheduled',
-      icon: Icons.access_time,
-      count: 0,
-      color: Colors.yellow,
-    ),
-    Homewidget(
-      text: 'All',
-      icon: Icons.inbox,
-      count: 0,
-      color: Colors.grey,
-    ),
-    Homewidget(
-      text: 'Flagged',
-      icon: Icons.flag,
-      count: 0,
-      color: Colors.red,
-    )
+    [
+      Homewidget(
+        text: 'Today',
+        icon: Icons.calendar_today,
+        count: 0,
+        color: Colors.blue,
+      ),
+      Homewidget(
+        text: 'Scheduled',
+        icon: Icons.access_time,
+        count: 0,
+        color: Colors.yellow,
+      )
+    ],
+    [
+      Homewidget(
+        text: 'All',
+        icon: Icons.inbox,
+        count: 0,
+        color: Colors.grey,
+      ),
+      Homewidget(
+        text: 'Flagged',
+        icon: Icons.flag,
+        count: 0,
+        color: Colors.red,
+      )
+    ]
   ];
   @override
   Widget build(BuildContext context) {
@@ -54,24 +58,32 @@ class HomePage extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
-              height: 260,
-              child: GridView.count(
-                mainAxisSpacing: 24,
-                crossAxisSpacing: 24,
-                crossAxisCount: 2,
-                childAspectRatio: (200 / 100),
-                children: this.litsOfHomwWidget,
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: this.litsOfHomwWidget[0],
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 16),
+              margin: EdgeInsets.only(top: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: this.litsOfHomwWidget[1],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                left: 16,
+                top: 26,
+                bottom: 0,
+              ),
               child: Text(
                 'My Lists',
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 24,
+                  fontSize: 22,
                   fontFamily: 'SF',
                   fontWeight: FontWeight.w700,
                 ),

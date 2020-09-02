@@ -14,8 +14,8 @@ class Homewidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
-      height: 100,
+      width: 176,
+      height: 80,
       padding: EdgeInsets.only(left: 10, right: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +49,7 @@ class Homewidget extends StatelessWidget {
               this.count.toString(),
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 32,
+                fontSize: 28,
                 fontFamily: 'SF',
                 fontWeight: FontWeight.w700,
               ),
@@ -58,7 +58,7 @@ class Homewidget extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
         color: Colors.white,
         boxShadow: [
           BoxShadow(color: Colors.white, spreadRadius: 3),
