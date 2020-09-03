@@ -5,7 +5,7 @@ class Mylist extends StatelessWidget {
   final li = <Widget>[];
   @override
   Widget build(BuildContext context) {
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 14; i++) {
       li.add(
         Container(
           height: 44,
@@ -45,7 +45,7 @@ class Mylist extends StatelessWidget {
                 flex: 1,
                 child: Container(
                   alignment: Alignment.centerRight,
-                  padding: EdgeInsets.only(right: 10),
+                  padding: EdgeInsets.only(right: 2),
                   child: Text(
                     sprintf('%3d', [i * 2]),
                     style: TextStyle(
