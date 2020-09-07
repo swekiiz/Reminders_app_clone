@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
 
-class Mylist extends StatelessWidget {
+class Mylist extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MylistState();
+  }
+}
+
+class _MylistState extends State<Mylist> {
   final li = <Widget>[];
   @override
   Widget build(BuildContext context) {

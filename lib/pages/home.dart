@@ -1,19 +1,26 @@
-import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/components/homewidget.dart';
 import 'package:my_app/components/mylist.dart';
+import 'dart:ui';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _HomePageState();
+  }
+}
+
+class _HomePageState extends State<HomePage> {
   final litsOfHomwWidget = [
     [
-      Homewidget(
+      HomeWidget(
         text: 'Today',
         icon: Icons.calendar_today,
         count: 0,
         color: Colors.blue,
       ),
-      Homewidget(
+      HomeWidget(
         text: 'Scheduled',
         icon: Icons.access_time,
         count: 0,
@@ -21,13 +28,13 @@ class HomePage extends StatelessWidget {
       )
     ],
     [
-      Homewidget(
+      HomeWidget(
         text: 'All',
         icon: Icons.inbox,
         count: 0,
         color: Colors.grey,
       ),
-      Homewidget(
+      HomeWidget(
         text: 'Flagged',
         icon: Icons.flag,
         count: 0,
@@ -78,11 +85,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(
-                      left: 16,
-                      top: 26,
-                      bottom: 0,
-                    ),
+                    margin: EdgeInsets.fromLTRB(16, 26, 0, 0),
                     child: Text(
                       'My Lists',
                       style: TextStyle(
