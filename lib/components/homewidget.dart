@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/class/Data_format.dart';
+import 'package:my_app/class/Scolor.dart';
 
 class HomeWidget extends StatefulWidget {
   final icon;
   final text;
   final count;
   final color;
-
+  final list;
   HomeWidget({
     @required this.icon,
     @required this.text,
     @required this.count,
     @required this.color,
+    @required this.list,
   });
   @override
   State<StatefulWidget> createState() {
@@ -28,7 +30,11 @@ class _HomeWidgetState extends State<HomeWidget> {
         Navigator.pushNamed(
           context,
           '/inlist',
-          arguments: DataFromHomeToPage('hello'),
+          arguments: DataFromHomeToPage(
+            title: 'hello',
+            color: widget.color,
+            list: widget.list,
+          ),
         );
       },
       child: Container(
