@@ -28,7 +28,7 @@ Color strToColors(String s) {
   if (s == 'white70') return Colors.white70;
   if (s == 'white') return Colors.white;
   if (s == 'black') return Colors.black;
-  return Colors.black;
+  return Color.fromARGB(1, 255, 255, 255);
 }
 
 Color hexToColor(String s) {
