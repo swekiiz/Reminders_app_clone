@@ -8,13 +8,17 @@ class HomeWidget extends StatefulWidget {
   final text;
   final count;
   final color;
+  final scolor;
   final list;
+  final fetch;
   HomeWidget({
     @required this.icon,
     @required this.text,
     @required this.count,
     @required this.color,
+    @required this.scolor,
     @required this.list,
+    @required this.fetch,
   });
   @override
   State<StatefulWidget> createState() {
@@ -31,9 +35,12 @@ class _HomeWidgetState extends State<HomeWidget> {
           context,
           '/inlist',
           arguments: DataFromHomeToPage(
-            title: 'hello',
+            title: widget.text,
             color: widget.color,
+            scolor: widget.scolor,
             list: widget.list,
+            icon: widget.icon,
+            fetch: widget.fetch,
           ),
         );
       },

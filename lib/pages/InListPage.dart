@@ -12,18 +12,72 @@ class InListPage extends StatefulWidget {
 }
 
 class _InListPageState extends State<InListPage> {
+  bool _first;
+  List<ListData> _voidList = [];
+  List<ListData> _newList = [];
+  List<Widget> _list = [];
+  List<bool> _isChange = [];
+  initState() {
+    super.initState();
+    this._first = true;
+  }
+
+  exit(
+    dynamic args,
+    dynamic newList,
+    bool re,
+  ) async {
+    var data;
+    dynamic result = false;
+    if (args.id.length == 1) {
+      // print(ag.id[0]);
+      data = AllListData(
+        id: args.id[0],
+        title: args.title,
+        color: args.scolor,
+        icon: args.icon,
+        list: newList,
+      );
+      result = await sendingData(data);
+    }
+    try {
+      if (re) {
+        if (result) {
+          args.fetch();
+        } else {
+          print("can't fetch");
+        }
+      }
+    } catch (error) {
+      print(error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final DataFromHomeToPage args = ModalRoute.of(context).settings.arguments;
-    dynamic list = args.list
-        .map(
-          (e) => CheckBox(
+    if (this._first) {
+      this._first = false;
+      for (int i = 0; i < args.list.length; i++) {
+        _voidList.add(ListData(text: '', isCheck: false));
+        _isChange.add(false);
+      }
+      args.list.asMap().forEach(
+        (i, e) {
+          _list.add(CheckBox(
             text: e.text,
             isCheck: e.isCheck,
             color: args.color,
-          ),
-        )
-        .toList();
+            onChange: (dt) {
+              _voidList[i] = dt;
+              _isChange[i] = true;
+              print("$i");
+            },
+          ));
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(241, 241, 246, 1),
       body: Container(
@@ -39,15 +93,22 @@ class _InListPageState extends State<InListPage> {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          //EDIT_DATA_BASE
-                          var data = AllListData(
-                            id: args.id,
-                            title: args.title,
-                            color: args.scolor,
-                            icon: args.icon,
-                            list: args.list,
-                          );
-                          sendingData(data);
+                          bool sum = true;
+                          for (int i = 0; i < _voidList.length; i++) {
+                            sum = sum && !_isChange[i];
+                            String selectText = _isChange[i]
+                                ? _voidList[i].text
+                                : args.list[i].text;
+                            bool selectCheck = _isChange[i]
+                                ? _voidList[i].isCheck
+                                : args.list[i].isCheck;
+                            _newList.add(ListData(
+                              text: selectText,
+                              isCheck: selectCheck,
+                            ));
+                          }
+                          exit(args, _newList, !sum);
+                          _newList.clear();
                           Navigator.pop(context);
                         },
                         child: Stack(
@@ -97,7 +158,7 @@ class _InListPageState extends State<InListPage> {
               Padding(
                 padding: EdgeInsets.only(left: 20),
                 child: Column(
-                  children: list,
+                  children: _list,
                 ),
               ),
             ],

@@ -5,6 +5,7 @@ import 'package:my_app/components/mylist.dart';
 // import 'package:my_app/class/DataAccessObject.dart';
 import 'package:my_app/API.dart';
 import 'dart:ui';
+import 'package:my_app/class/Scolor.dart';
 // import 'dart:convert';
 
 class HomePage extends StatefulWidget {
@@ -26,10 +27,15 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  fetch() {
+    this._post = fetchData();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _post,
+      future: this._post,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var dataListLength = snapshot.data.length;
@@ -76,14 +82,18 @@ class _HomePageState extends State<HomePage> {
                                 icon: Icons.calendar_today,
                                 count: 0,
                                 color: Color.fromRGBO(60, 150, 250, 1),
+                                scolor: colorToHex(60, 150, 250),
                                 list: allList,
+                                fetch: fetch,
                               ),
                               HomeWidget(
                                 text: 'Scheduled',
                                 icon: Icons.access_time,
                                 count: 0,
                                 color: Color.fromRGBO(242, 222, 50, 1),
+                                scolor: colorToHex(242, 222, 50),
                                 list: allList,
+                                fetch: fetch,
                               )
                             ],
                           ),
@@ -96,16 +106,26 @@ class _HomePageState extends State<HomePage> {
                               HomeWidget(
                                 text: 'All',
                                 icon: Icons.inbox,
-                                count: 0,
+                                count: allList.length,
                                 color: Colors.grey,
+                                scolor: '#' +
+                                    Colors.grey.value
+                                        .toRadixString(16)
+                                        .substring(2, 8),
                                 list: allList,
+                                fetch: fetch,
                               ),
                               HomeWidget(
                                 text: 'Flagged',
                                 icon: Icons.flag,
                                 count: 0,
                                 color: Colors.red,
+                                scolor: '#' +
+                                    Colors.red.value
+                                        .toRadixString(16)
+                                        .substring(2, 8),
                                 list: allList,
+                                fetch: fetch,
                               )
                             ],
                           ),
@@ -122,7 +142,10 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Mylist(data: snapshot.data),
+                        Mylist(
+                          data: snapshot.data,
+                          fetch: fetch,
+                        ),
                       ],
                     ),
                   ),

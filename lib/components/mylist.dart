@@ -5,7 +5,8 @@ import 'package:my_app/class/Scolor.dart';
 
 class Mylist extends StatefulWidget {
   final dynamic data;
-  Mylist({@required this.data});
+  final dynamic fetch;
+  Mylist({@required this.data,@required this.fetch});
   @override
   State<StatefulWidget> createState() {
     return _MylistState();
@@ -30,12 +31,13 @@ class _MylistState extends State<Mylist> {
               context,
               '/inlist',
               arguments: DataFromHomeToPage(
-                id: widget.data[i].id,
+                id: [widget.data[i].id],
                 title: title,
                 color: color,
                 scolor: widget.data[i].color,
                 icon: widget.data[i].icon,
                 list: widget.data[i].list,
+                fetch: widget.fetch,
               ),
             );
           },
