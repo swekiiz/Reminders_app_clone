@@ -124,8 +124,8 @@ class _InListPageState extends State<InListPage> {
                               child: Text(
                                 'Lists',
                                 style: TextStyle(
-                                  fontSize: 18,
                                   color: Colors.blue,
+                                  fontSize: 18,
                                 ),
                               ),
                             )

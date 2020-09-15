@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:my_app/class/DataAccessObject.dart';
 
-const baseUrl = "http://79b9a92a52fd.ngrok.io";
+//===========================- Config URL here -===============================
+const baseUrl = "";
+//=============================================================================
 
 Future<List<AllListData>> fetchData() async {
   var url = baseUrl + '/webhook';

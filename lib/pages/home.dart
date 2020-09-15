@@ -4,8 +4,8 @@ import 'package:my_app/components/homewidget.dart';
 import 'package:my_app/components/mylist.dart';
 // import 'package:my_app/class/DataAccessObject.dart';
 import 'package:my_app/API.dart';
-import 'dart:ui';
 import 'package:my_app/class/Scolor.dart';
+import 'dart:ui';
 // import 'dart:convert';
 
 class HomePage extends StatefulWidget {
@@ -81,8 +81,8 @@ class _HomePageState extends State<HomePage> {
                                 text: 'Today',
                                 icon: Icons.calendar_today,
                                 count: 0,
-                                color: Color.fromRGBO(60, 150, 250, 1),
-                                scolor: colorToHex(60, 150, 250),
+                                color: Color.fromRGBO(59, 150, 250, 1),
+                                scolor: colorToHex(59, 150, 250),
                                 list: allList,
                                 fetch: fetch,
                               ),
@@ -90,8 +90,8 @@ class _HomePageState extends State<HomePage> {
                                 text: 'Scheduled',
                                 icon: Icons.access_time,
                                 count: 0,
-                                color: Color.fromRGBO(242, 222, 50, 1),
-                                scolor: colorToHex(242, 222, 50),
+                                color: Color.fromRGBO(242, 223, 50, 1),
+                                scolor: colorToHex(242, 223, 50),
                                 list: allList,
                                 fetch: fetch,
                               )
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         } else if (snapshot.hasError) {
-          return Text("Error");
+          return Text("ERROR");
         }
         return CircularProgressIndicator();
       },
