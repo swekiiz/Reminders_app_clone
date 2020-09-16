@@ -11,6 +11,7 @@ class HomeWidget extends StatefulWidget {
   final scolor;
   final list;
   final fetch;
+  final id;
   HomeWidget({
     @required this.icon,
     @required this.text,
@@ -19,6 +20,7 @@ class HomeWidget extends StatefulWidget {
     @required this.scolor,
     @required this.list,
     @required this.fetch,
+    @required this.id,
   });
   @override
   State<StatefulWidget> createState() {
@@ -39,8 +41,9 @@ class _HomeWidgetState extends State<HomeWidget> {
             color: widget.color,
             scolor: widget.scolor,
             list: widget.list,
-            icon: widget.icon,
             fetch: widget.fetch,
+            id: widget.id
+            // icon: widget.icon,
           ),
         );
       },
@@ -64,7 +67,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                 Text(
                   widget.text,
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: strToColors('grey'),
                     fontSize: 16,
                     fontFamily: 'SF',
                     fontWeight: FontWeight.w700,

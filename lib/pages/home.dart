@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/components/homewidget.dart';
 import 'package:my_app/components/mylist.dart';
-// import 'package:my_app/class/DataAccessObject.dart';
+import 'package:my_app/class/DataAccessObject.dart';
 import 'package:my_app/API.dart';
 import 'package:my_app/class/Scolor.dart';
 import 'dart:ui';
@@ -18,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _post;
   var allList = [];
+  List<String> allId = [];
   initState() {
     super.initState();
     this._post = fetchData();
@@ -39,11 +40,26 @@ class _HomePageState extends State<HomePage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var dataListLength = snapshot.data.length;
+          var middleTemp = [];
           allList.clear();
+          allId.clear();
+          int _ = 0;
           for (int i = 0; i < dataListLength; i++) {
+            allId.add(snapshot.data[i].id);
             var listLength = snapshot.data[i].list.length;
             for (int j = 0; j < listLength; j++) {
-              allList.add(snapshot.data[i].list[j]);
+              if (snapshot.data[i].list[j] != null)
+                middleTemp.add(snapshot.data[i].list[j]);
+              else
+                middleTemp.add(ListData(isCheck: false, text: ''));
+              CheckBoxWithId ct = CheckBoxWithId();
+              ct.isCheck = middleTemp[_].isCheck;
+              ct.text = middleTemp[_].text;
+              ct.id = snapshot.data[i].id;
+              allList.add(ct);
+              // print(allList[_].isCheck);
+              // print(allList[_].text);
+              _++;
             }
           }
           return Scaffold(
@@ -85,6 +101,7 @@ class _HomePageState extends State<HomePage> {
                                 scolor: colorToHex(59, 150, 250),
                                 list: allList,
                                 fetch: fetch,
+                                id: allId,
                               ),
                               HomeWidget(
                                 text: 'Scheduled',
@@ -94,6 +111,7 @@ class _HomePageState extends State<HomePage> {
                                 scolor: colorToHex(242, 223, 50),
                                 list: allList,
                                 fetch: fetch,
+                                id: allId,
                               )
                             ],
                           ),
@@ -114,6 +132,7 @@ class _HomePageState extends State<HomePage> {
                                         .substring(2, 8),
                                 list: allList,
                                 fetch: fetch,
+                                id: allId,
                               ),
                               HomeWidget(
                                 text: 'Flagged',
@@ -126,6 +145,7 @@ class _HomePageState extends State<HomePage> {
                                         .substring(2, 8),
                                 list: allList,
                                 fetch: fetch,
+                                id: allId,
                               )
                             ],
                           ),

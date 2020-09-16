@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:my_app/class/DataAccessObject.dart';
 
 class CheckBox extends StatefulWidget {
-  final ValueChanged<ListData> onChange;
+  final ValueChanged<dynamic> onChange;
   final text;
+  final id;
   final bool isCheck;
   final color;
   CheckBox({
     @required this.text,
     @required this.isCheck,
     @required this.color,
+    this.id,
     this.onChange,
   });
   @override
@@ -17,15 +19,24 @@ class CheckBox extends StatefulWidget {
 }
 
 class _CheckBoxState extends State<CheckBox> {
+  final String noid =
+      '_NOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOID_';
   bool _isCheck = false;
   var _messageController = TextEditingController();
   dynamic _listdata = ListData();
+  dynamic _listdataid = ForID();
   initState() {
     super.initState();
     this._messageController.text = widget.text;
+    // this._messageController.text = widget.id;
     this._isCheck = widget.isCheck;
     this._listdata.isCheck = this._isCheck;
     this._listdata.text = this._messageController.text;
+    if (widget.id != null) {
+      // print(widget.id);
+      this._listdataid.listdata = this._listdata;
+      this._listdataid.id = widget.id;
+    }
   }
 
   @override
@@ -39,7 +50,12 @@ class _CheckBoxState extends State<CheckBox> {
                 _isCheck = !_isCheck;
               });
               this._listdata.isCheck = this._isCheck;
-              widget.onChange(this._listdata);
+              if (widget.id == null) {
+                widget.onChange(this._listdata);
+              } else {
+                this._listdataid.listdata = this._listdata;
+                widget.onChange(this._listdataid);
+              }
             },
             child: Container(
               decoration: BoxDecoration(
@@ -73,7 +89,12 @@ class _CheckBoxState extends State<CheckBox> {
             child: TextField(
               onChanged: (dt) {
                 this._listdata.text = this._messageController.text;
-                widget.onChange(this._listdata);
+                if (widget.id == null) {
+                  widget.onChange(this._listdata);
+                } else {
+                  this._listdataid.listdata = this._listdata;
+                  widget.onChange(this._listdataid);
+                }
               },
               textAlign: TextAlign.left,
               decoration: InputDecoration(

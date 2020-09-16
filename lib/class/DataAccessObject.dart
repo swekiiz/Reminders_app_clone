@@ -38,4 +38,42 @@ class AllListData {
         'icon': icon,
         'list': list.map<dynamic>((item) => item.toJson()).toList(),
       };
+  Map<String, dynamic> toSomeJson() => {
+        'id': id,
+        'list': list.map<dynamic>((item) => item.toJson()).toList(),
+      };
+}
+
+class CheckBoxWithId {
+  String text;
+  bool isCheck;
+  String id;
+  CheckBoxWithId({this.text, this.isCheck, this.id});
+  factory CheckBoxWithId.fromJson(Map<String, dynamic> item) => CheckBoxWithId(
+        text: item['text'],
+        isCheck: item['isCheck'],
+        id: item['id'],
+      );
+  Map<String, dynamic> toJson() => {
+        'text': text,
+        'isCheck': isCheck,
+        'id': id,
+      };
+  // set setIsCheck(bool b) {
+  //   this.isCheck = b;
+  // }
+
+  // set setText(String t) {
+  //   this.text = t;
+  // }
+
+  // set setId(String i) {
+  //   this.id = i;
+  // }
+}
+
+class ForID {
+  ListData listdata;
+  String id;
+  ForID({this.listdata, this.id});
 }
