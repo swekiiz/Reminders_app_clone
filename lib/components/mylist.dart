@@ -38,6 +38,7 @@ class _MylistState extends State<Mylist> {
                 icon: widget.data[i].icon,
                 list: widget.data[i].list,
                 fetch: widget.fetch,
+                isHome: false,
               ),
             );
           },

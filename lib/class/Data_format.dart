@@ -8,6 +8,7 @@ class DataFromHomeToPage {
   final String icon;
   final List list;
   final dynamic fetch;
+  final isHome;
   DataFromHomeToPage({
     this.id,
     this.title,
@@ -16,5 +17,6 @@ class DataFromHomeToPage {
     this.icon,
     this.list,
     this.fetch,
+    this.isHome,
   });
 }

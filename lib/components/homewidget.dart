@@ -42,7 +42,8 @@ class _HomeWidgetState extends State<HomeWidget> {
             scolor: widget.scolor,
             list: widget.list,
             fetch: widget.fetch,
-            id: widget.id
+            id: widget.id,
+            isHome: true,
             // icon: widget.icon,
           ),
         );
