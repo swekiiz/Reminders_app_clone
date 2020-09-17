@@ -12,15 +12,33 @@ class InListPage extends StatefulWidget {
 }
 
 class _InListPageState extends State<InListPage> {
+  var _headController = TextEditingController();
   bool _first;
-  List<ListData> _voidList = [];
+  bool _isHeadChange = false;
+  List<PairKey> _voidList = [];
   List<dynamic> _newList = [];
   List<Widget> _list = [];
-  List<bool> _isChange = [];
-  List<String> _listOfId = [];
+  List<PairKey> _isChange = [];
+  List<PairKey> _listOfId = [];
   initState() {
     super.initState();
     this._first = true;
+  }
+
+  remove(Key kpos) {
+    print('--------------');
+    for (int i = 0; i < _voidList.length; i++) {
+      print(_isChange[i].item);
+    }
+    _voidList.removeWhere((contact) => contact.key == kpos);
+    _isChange.removeWhere((contact) => contact.key == kpos);
+    _listOfId.removeWhere((contact) => contact.key == kpos);
+    _list.removeWhere((contact) => contact.key == kpos);
+    print('++++++++++++++');
+    for (int i = 0; i < _voidList.length; i++) {
+      print(_isChange[i].item);
+    }
+    setState(() {});
   }
 
   exit(
@@ -34,7 +52,7 @@ class _InListPageState extends State<InListPage> {
       // print(ag.id[0]);
       data = AllListData(
         id: args.id[0],
-        title: args.title,
+        title: this._headController.text,
         color: args.scolor,
         icon: args.icon,
         list: newList,
@@ -45,7 +63,6 @@ class _InListPageState extends State<InListPage> {
       Map<String, int> M = Map();
       result = true;
       for (int i = 0; i < args.id.length; i++) {
-        // print(args.id[i]);
         M[args.id[i]] = i;
         dynamic dataTemp = AllListData(
           id: args.id[i],
@@ -82,39 +99,50 @@ class _InListPageState extends State<InListPage> {
     final DataFromHomeToPage args = ModalRoute.of(context).settings.arguments;
     if (this._first) {
       this._first = false;
+      this._headController.text = args.title;
       const NOID = '_NOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOIDNOID_';
       for (int i = 0; i < args.list.length; i++) {
-        _voidList.add(ListData(text: '', isCheck: false));
-        _isChange.add(false);
+        _voidList.add(PairKey(
+          key: Key('$i'),
+          item: ListData(text: '', isCheck: false),
+        ));
+        _isChange.add(PairKey(
+          key: Key('$i'),
+          item: false,
+        ));
         if (args.id.length == 1) {
-          _listOfId.add(NOID);
+          _listOfId.add(PairKey(item: NOID, key: Key('$i')));
         } else {
-          _listOfId.add(args.list[i].id);
+          _listOfId.add(PairKey(item: args.list[i].id, key: Key('$i')));
         }
       }
       args.list.asMap().forEach(
         (i, e) {
           if (e is ListData) {
             _list.add(CheckBox(
+              key: Key('$i'),
               text: e.text,
               isCheck: e.isCheck,
               color: args.color,
+              callBackRemove: remove,
               onChange: (dt) {
-                _voidList[i] = dt;
-                _isChange[i] = true;
+                _voidList[i].item = dt;
+                _isChange[i].item = true;
                 // print("$i");
               },
             ));
           } else if (e is CheckBoxWithId) {
             _list.add(CheckBox(
+              key: Key('$i'),
               text: e.text,
               isCheck: e.isCheck,
               color: args.color,
               id: e.id,
+              callBackRemove: remove,
               onChange: (dt) {
-                _voidList[i] = dt.listdata;
-                _isChange[i] = true;
-                _listOfId[i] = dt.id;
+                _voidList[i].item = dt.listdata;
+                _isChange[i].item = true;
+                _listOfId[i].item = dt.id;
                 // print(dt.id);
                 // print("$i");
               },
@@ -141,12 +169,12 @@ class _InListPageState extends State<InListPage> {
                         onTap: () {
                           bool sum = true;
                           for (int i = 0; i < _voidList.length; i++) {
-                            sum = sum && !_isChange[i];
-                            String selectText = _isChange[i]
-                                ? _voidList[i].text
+                            sum = sum && !_isChange[i].item;
+                            String selectText = _isChange[i].item
+                                ? _voidList[i].item.text
                                 : args.list[i].text;
-                            bool selectCheck = _isChange[i]
-                                ? _voidList[i].isCheck
+                            bool selectCheck = _isChange[i].item
+                                ? _voidList[i].item.isCheck
                                 : args.list[i].isCheck;
                             if (args.id.length == 1) {
                               _newList.add(ListData(
@@ -157,11 +185,11 @@ class _InListPageState extends State<InListPage> {
                               _newList.add(CheckBoxWithId(
                                 text: selectText,
                                 isCheck: selectCheck,
-                                id: _listOfId[i],
+                                id: _listOfId[i].item,
                               ));
                             }
                           }
-                          exit(args, _newList, !sum);
+                          exit(args, _newList, !sum || _isHeadChange);
                           _newList.clear();
                           Navigator.pop(context);
                         },
@@ -199,12 +227,23 @@ class _InListPageState extends State<InListPage> {
                 margin: EdgeInsets.only(top: 18),
                 padding: EdgeInsets.only(left: 20),
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  args.title,
+                child: TextField(
+                  controller: this._headController,
+                  onChanged: (value) {
+                    _isHeadChange = true;
+                  },
                   style: TextStyle(
                     color: args.color,
                     fontSize: 34,
                     fontWeight: FontWeight.bold,
+                  ),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.all(1),
                   ),
                   textAlign: TextAlign.left,
                 ),

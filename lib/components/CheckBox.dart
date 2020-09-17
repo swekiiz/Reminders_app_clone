@@ -7,13 +7,17 @@ class CheckBox extends StatefulWidget {
   final id;
   final bool isCheck;
   final color;
+  final callBackRemove;
   CheckBox({
+    Key key,
     @required this.text,
     @required this.isCheck,
     @required this.color,
     this.id,
     this.onChange,
-  });
+    this.callBackRemove,
+  }) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => _CheckBoxState();
 }
@@ -94,6 +98,12 @@ class _CheckBoxState extends State<CheckBox> {
                 } else {
                   this._listdataid.listdata = this._listdata;
                   widget.onChange(this._listdataid);
+                }
+              },
+              onSubmitted: (dt) {
+                if (dt == '') {
+                  widget.callBackRemove(widget.key);
+                  setState(() {});
                 }
               },
               textAlign: TextAlign.left,

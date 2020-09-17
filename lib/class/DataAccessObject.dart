@@ -1,4 +1,4 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 // import 'dart:convert';
 
 class ListData {
@@ -76,4 +76,10 @@ class ForID {
   ListData listdata;
   String id;
   ForID({this.listdata, this.id});
+}
+
+class PairKey {
+  Key key;
+  dynamic item;
+  PairKey({this.key, this.item});
 }

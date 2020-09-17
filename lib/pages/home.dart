@@ -6,7 +6,6 @@ import 'package:my_app/class/DataAccessObject.dart';
 import 'package:my_app/API.dart';
 import 'package:my_app/class/Scolor.dart';
 import 'dart:ui';
-// import 'dart:convert';
 
 class HomePage extends StatefulWidget {
   @override
@@ -29,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   fetch() {
+    // print('call fetch');
     this._post = fetchData();
     setState(() {});
   }
