@@ -20,3 +20,8 @@ class DataFromHomeToPage {
     this.isHome,
   });
 }
+
+class DataCallback {
+  final dynamic fetch;
+  DataCallback({this.fetch});
+}

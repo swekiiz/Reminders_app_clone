@@ -232,6 +232,9 @@ class _InListPageState extends State<InListPage> {
                                   ));
                                 }
                               }
+                              if (_voidList.length == 0) {
+                                sum = false;
+                              }
                               exit(args, _newList,
                                   (!sum) || _isHeadChange || _isAddList);
                               _newList.clear();

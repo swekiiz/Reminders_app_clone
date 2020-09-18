@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_app/class/Data_format.dart';
 import 'package:my_app/components/homewidget.dart';
 import 'package:my_app/components/mylist.dart';
 import 'package:my_app/class/DataAccessObject.dart';
@@ -195,11 +196,22 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.topRight,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.transparent,
-                    child: Text(
-                      'Add List',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.blue,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/inbuild',
+                          arguments: DataCallback(
+                            fetch: fetch,
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Add List',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.blue,
+                        ),
                       ),
                     ),
                   ),

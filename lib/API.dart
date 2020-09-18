@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:my_app/class/DataAccessObject.dart';
 
 //===========================- Config URL here -===============================
-const baseUrl = "http://7b27882c8e53.ngrok.io";
+const baseUrl = "http://xxxxxxxxxxxxxxxxxxxx.ngrok.io";
 //=============================================================================
 
 Future<List<AllListData>> fetchData() async {

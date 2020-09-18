@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:my_app/class/Data_format.dart';
 import 'package:my_app/class/Scolor.dart';
+import 'package:my_app/class/Icon_table.dart';
 
 class Mylist extends StatefulWidget {
   final dynamic data;
   final dynamic fetch;
-  Mylist({@required this.data,@required this.fetch});
+  Mylist({@required this.data, @required this.fetch});
   @override
   State<StatefulWidget> createState() {
     return _MylistState();
@@ -54,10 +55,10 @@ class _MylistState extends State<Mylist> {
                   child: Container(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.only(left: 2),
-                    child: Icon(
-                      Icons.format_list_bulleted,
-                      color: color,
-                      size: 26,
+                    child: getIcon(
+                      widget.data[i].icon,
+                      26,
+                      widget.data[i].color,
                     ),
                   ),
                 ),
