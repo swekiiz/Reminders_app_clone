@@ -1,4 +1,4 @@
-# my_app
+# my_app 🐶
 
 This is my first project that use Flutter.
 This project was made to learn a Flutter.
